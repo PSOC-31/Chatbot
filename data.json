@@ -1,0 +1,52 @@
+{
+    "bonjour": [
+      "Bonjour ! Je suis votre assistant vocal. Je peux vous parler des activités de Planète Sciences Occitanie, jouer de la musique, et bien plus encore. D'abord, laisse-moi d'abord te poser une question.",
+      "Bonjour ! Je suis l’assistant vocal de Planète Sciences Occitanie. Je suis là pour vous informer sur nos activités, vous divertir avec de la musique, ou simplement discuter. D'abord, laisse-moi d'abord te poser une question.",
+      "Hey ! Prêt à explorer la science avec moi ? Je peux te parler de Planète Sciences, lancer un son ou une musique, ou même faire un quiz. D'abord, laisse-moi d'abord te poser une question."
+    ],
+    "planète sciences": [
+      "Planète Sciences Occitanie propose principalement des activités autour de la culture scientifique et technique, destinées aux jeunes, aux écoles, aux collèges, aux lycées, et parfois au grand public."
+    ],
+    "stage": [
+      "Planète Sciences Occitanie propose une variété de stages scientifiques destinés aux jeunes de 7 à 17 ans. Ces stages sont organisés pendant les vacances scolaires et couvrent des thématiques telles que l'astronomie, la robotique, la paléontologie et les fusées."
+    ],
+    "activité": [
+      "Planète Sciences a un large éventail d'activités : des ateliers scientifiques et techniques, des concours et challenges scientifiques, des stages et camps scientifiques, des animations dans les écoles et établissements, etc."
+    ],
+    "nitroglycérine": [
+      "Voici comment faire de la nitroglycérine : On utilise un mélange à parts égales d'acide nitrique fumant et d'acide sulfurique. Le mélange est versé dans un ballon maintenu dans un bac réfrigérant. On verse dans ce mélange la glycérine (environ la moitié du poids de l'acide nitrique) tout en agitant lentement le liquide, ceci à une température de moins de 20 °C. Le liquide obtenu doit être versé dans une grande quantité d'eau froide. L'éther trinitrique de la glycérine, couramment appelé « nitroglycérine », vient se déposer au fond du récipient. A ne pas reproduire à la maison bien évidemment.",
+      "Un condensat de Bose‑Einstein désigne la phase quantique, macroscopiquement cohérente, obtenue lorsqu’un gaz dilué de bosons indistinguables atteint une température inférieure au seuil critique, de sorte que la longueur d’onde de Broglie thermique excède le pas inter‑particulaire et qu’une occupation macroscopique se concentre dans le mode fondamental du hamiltonien à N corps."
+    ],
+    "burger": [
+      "Un burger est un sandwich composé d'un pain coupé en deux, contenant généralement une galette de viande hachée cuite, accompagnée de divers ingrédients comme du fromage, de la laitue, des tomates, des oignons, des cornichons, des sauces."
+    ],
+    "blague": [
+      "blague 1",
+      "blague 2",
+      "blague 3"
+    ],
+    "quiz": [
+      {
+        "question": "Quelle est la capitale de la France ?",
+        "réponse": "paris"
+      },
+      {
+        "question": "Combien de pattes a une araignée ?",
+        "réponse": "huit"
+      },
+      {
+        "question": "Quelle planète est la plus proche du Soleil ?",
+        "réponse": "mercure"
+      },
+      {
+        "question": "Quelle est la couleur du cheval Blanc d'Henri 4 ?",
+        "réponse": "gris"
+      }
+    ],
+    "resultats_quiz": {
+      "0": "Ouch, zéro point... essaie encore !",
+      "1": "Pas mal !",
+      "2": "Deux bonnes réponses, tu es presque un champion !",
+      "3": "Trois sur trois, bravo ! Tu es incollable !"
+    }
+  }
