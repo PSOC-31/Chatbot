@@ -10,12 +10,19 @@ Ce projet est un assistant vocal interactif développé en Python. Il est capabl
 - Reconnaissance vocale locale avec [VOSK](https://alphacephei.com/vosk/)
 - Lecture de musiques ou sons aléatoires
 - Quiz vocal avec questions/réponses orales
-- Réaction spécifique si l'utilisateur a le baccalauréat (gag sonore)
+- Réaction spécifique (gag sonore) si l'utilisateur est jeune ou non (test du baccalauréat) pour ne pas l'affecter mentalement
 
 
 ## Lancer l'assistant
 
-Assurez-vous que les dépendances sont installées (voir ci-dessous), puis exécutez :
+Assurez-vous que les dépendances sont installées (voir ci-dessous), puis exécutez la commande bash
+
+
+## Dépendances
+
+sudo apt install mpg123 libttspico-utils
+pip install vosk sounddevice
+
 
 ```bash
-python3 assistant_vocal.py
+python3 main.py

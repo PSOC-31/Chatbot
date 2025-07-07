@@ -18,6 +18,7 @@ SOUND_DIR     = ROOT / "sounds" / "random"
 DATA_JSON     = ROOT / "data.json"
 FAREWELL_MP3  = ROOT / "sounds" / "Au_revoir.mp3"
 MAUVAIS_MP3   = ROOT / "sounds" / "Tes_mauvais.mp3"
+INIT_FILE = ROOT / ".initialized"
 SAMPLE_RATE   = 16_000
 
 # ──────────────── États globaux ────────────────
@@ -64,9 +65,64 @@ def audio_callback(indata, frames, time, status):
 with DATA_JSON.open(encoding="utf-8") as f:
     definitions: dict[str, list[str]] = json.load(f)
 
+# ─────────────────────── Quiz ───────────────────────
+def run_quiz():
+    questions = definitions.get("quiz", [])
+    feedbacks = definitions.get("resultats_quiz", {})
+
+    if len(questions) < 3:
+        speak("Désolé, il n'y a pas assez de questions dans le quiz.")
+        return
+
+    selected = random.sample(questions, 3)
+    score = 0
+
+    for i, q in enumerate(selected, 1):
+        speak(f"Question {i} : {q['question']}")
+
+        while True:
+            data = audio_q.get()
+            if rec.AcceptWaveform(data):
+                text = json.loads(rec.Result()).get("text", "").lower()
+                if not text:
+                    continue
+
+                print(f"Réponse : {text}")
+
+                # Interruption par "au revoir"
+                if "au revoir" in text or "aurevoir" in text:
+                    speak("À bientôt.")
+                    play_mp3(FAREWELL_MP3, "sound_proc")
+                    return
+
+                # Interruption par "armageddon"
+                if "armageddon" in text:
+                    speak("Arrêt du programme.")
+                    if INIT_FILE.exists():
+                        INIT_FILE.unlink()
+                    raise SystemExit
+
+                if q["réponse"].lower() in text:
+                    speak("Bonne réponse !")
+                    score += 1
+                else:
+                    speak(f"Mauvaise réponse. La bonne réponse était {q['réponse']}.")
+                break
+
+    feedback = feedbacks.get(str(score), "Merci d'avoir joué !")
+    speak(f"Tu as obtenu {score} point{'s' if score > 1 else ''}. {feedback}")
+
+    if score == 0 and has_bac:
+        play_mp3(MAUVAIS_MP3, "sound_proc")
+
+
 # ──────────────── Boucle principale ────────────────
 def listen_and_respond():
     global assistant_active, en_ecoute
+
+    if not INIT_FILE.exists():
+        speak("Assistant initialisé avec succès.")
+        INIT_FILE.touch()
 
     print("Assistant prêt. Dites « bonjour » pour le réveiller (ou « armageddon » pour quitter).")
 
@@ -88,7 +144,9 @@ def listen_and_respond():
 
             # ---------- commandes système ----------
             if "armageddon" in text:
-                speak("Arrêt du programme.")
+                speak("Arrêt du programme.\n")
+                if INIT_FILE.exists():
+                    INIT_FILE.unlink()
                 break
 
             if "pause" in text and assistant_active:
@@ -133,7 +191,10 @@ def listen_and_respond():
                     continue
 
             if "au revoir" in text or "aurevoir" in text:
+                has_bac = False
+                has_answered_bac = False
                 assistant_active = False
+            
                 play_mp3(FAREWELL_MP3, "sound_proc")
                 continue
             # ----------------------------------------
@@ -173,45 +234,13 @@ def listen_and_respond():
                     break
             # --------------------------------------------
 
-def run_quiz():
-    questions = definitions.get("quiz", [])
-    feedbacks = definitions.get("resultats_quiz", {})
-
-    if len(questions) < 3:
-        speak("Désolé, il n'y a pas assez de questions dans le quiz.")
-        return
-
-    selected = random.sample(questions, 3)
-    score = 0
-
-    for i, q in enumerate(selected, 1):
-        speak(f"Question {i} : {q['question']}")
-        
-        # Attente et traitement de la réponse
-        while True:
-            data = audio_q.get()
-            if rec.AcceptWaveform(data):
-                text = json.loads(rec.Result()).get("text", "").lower()
-                if text:
-                    print(f"Réponse : {text}")
-                    break
-
-        if q["réponse"].lower() in text:
-            speak("Bonne réponse !")
-            score += 1
-        else:
-            speak(f"Mauvaise réponse. La bonne réponse était {q['réponse']}.")
-
-    # Résultat final
-    feedback = feedbacks.get(str(score), "Merci d'avoir joué !")
-    speak(f"Tu as obtenu {score} point{'s' if score > 1 else ''}. {feedback}")
-    if score == 0 and has_bac:
-        play_mp3(MAUVAIS_MP3, "sound_proc")
-
-
 if __name__ == "__main__":
     try:
         listen_and_respond()
     except KeyboardInterrupt:
         play_mp3(FAREWELL_MP3, "sound_proc")
+
+        if INIT_FILE.exists():
+            INIT_FILE.unlink()
+        
         print("\nFin du programme.")
