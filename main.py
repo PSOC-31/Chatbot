@@ -8,6 +8,7 @@ import subprocess
 from pathlib import Path
 import sounddevice as sd
 import vosk
+import time
 
 # ──────────────── Configuration générale ────────────────
 random.seed()                              # graine aléatoire
@@ -20,6 +21,7 @@ FAREWELL_MP3  = ROOT / "sounds" / "Au_revoir.mp3"
 MAUVAIS_MP3   = ROOT / "sounds" / "Tes_mauvais.mp3"
 INIT_FILE = ROOT / ".initialized"
 SAMPLE_RATE   = 16_000
+INACTIVITY_TIMEOUT = 90  # Durée max d'inactivité avant retour en veille
 
 # ──────────────── États globaux ────────────────
 assistant_active = False     # réveille / endort l'assistant
@@ -100,23 +102,32 @@ def run_quiz():
 
     for i, q in enumerate(selected, 1):
         speak(f"Question {i} : {q['question']}")
+        last_active_time = time.time()
 
         while True:
-            data = audio_q.get()
+            # Vérifie le timeout d'inactivité
+            if time.time() - last_active_time > INACTIVITY_TIMEOUT:
+                speak("Tu es trop silencieux. On arrête le quiz.")
+                raise AssistantReset
+
+            try:
+                data = audio_q.get(timeout=1.0)  # attend max 1 seconde
+            except queue.Empty:
+                continue  # aucune donnée, on continue à attendre
+
             if rec.AcceptWaveform(data):
                 text = json.loads(rec.Result()).get("text", "").lower()
                 if not text:
                     continue
 
+                last_active_time = time.time()  # mise à jour uniquement si texte non vide
                 print(f"Réponse : {text}")
 
-                # Interruption par "au revoir"
                 if "au revoir" in text or "aurevoir" in text:
                     speak("À bientôt.")
                     play_mp3(FAREWELL_MP3, "sound_proc")
                     raise AssistantReset
 
-                # Interruption par "armageddon"
                 if "armageddon" in text:
                     speak("Arrêt du programme.")
                     if INIT_FILE.exists():
@@ -135,6 +146,7 @@ def run_quiz():
 
     if score == 0 and has_bac:
         play_mp3(MAUVAIS_MP3, "sound_proc")
+
 
 
 # ──────────────── Boucle principale ────────────────
@@ -218,15 +230,24 @@ def listen_and_respond():
 
 
         # Boucle principale
+        last_active_time = time.time()
         while True:
+            # Réinitialise si aucune activité pendant 90 secondes
+            if time.time() - last_active_time > INACTIVITY_TIMEOUT:
+                speak("Aucune activité détectée. Je retourne en veille.")
+                raise AssistantReset
+
             data = audio_q.get()
             if not rec.AcceptWaveform(data):
                 continue
 
             text = json.loads(rec.Result()).get("text", "").lower()
             if not text:
-                continue
+                continue  # ← n'actualise pas le timer si vide
+
+            last_active_time = time.time()  # ← seulement si une vraie entrée
             print(f"> {text}")
+
 
             # ---------- commandes système ----------
             if "armageddon" in text:
@@ -275,6 +296,7 @@ def listen_and_respond():
 
             if "questions réponses" in text or "quiz" in text:
                 run_quiz()
+                last_active_time = time.time()
                 continue
 
             if "au revoir" in text or "aurevoir" in text:
