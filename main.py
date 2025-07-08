@@ -51,6 +51,10 @@ def random_file(directory: Path) -> Path | None:
     files = [p for p in directory.glob("*.mp3")]
     return random.choice(files) if files else None
 
+def is_audio_playing() -> bool:
+    """Retourne True si un son ou une musique est en cours de lecture."""
+    return (music_proc and music_proc.poll() is None) or (sound_proc and sound_proc.poll() is None)
+
 # ──────────────── Préparation Vosk ────────────────
 if not MODEL_PATH.exists():
     raise SystemExit(f"Modèle Vosk manquant : {MODEL_PATH}")
@@ -147,8 +151,6 @@ def run_quiz():
     if score == 0 and has_bac:
         play_mp3(MAUVAIS_MP3, "sound_proc")
 
-
-
 # ──────────────── Boucle principale ────────────────
 def listen_and_respond():
     global assistant_active, en_ecoute, has_bac, has_answered_bac
@@ -233,9 +235,10 @@ def listen_and_respond():
         last_active_time = time.time()
         while True:
             # Réinitialise si aucune activité pendant 90 secondes
-            if time.time() - last_active_time > INACTIVITY_TIMEOUT:
+            if not is_audio_playing() and time.time() - last_active_time > INACTIVITY_TIMEOUT:
                 speak("Aucune activité détectée. Je retourne en veille.")
                 raise AssistantReset
+
 
             data = audio_q.get()
             if not rec.AcceptWaveform(data):
@@ -315,9 +318,6 @@ def listen_and_respond():
                     speak(random.choice(replies))
                     break
             # --------------------------------------------
-
-
-
 
 if __name__ == "__main__":
     try:
