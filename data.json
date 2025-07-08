@@ -1,31 +1,61 @@
-{
-    "bonjour": [
-      "Bonjour ! Je suis votre assistant vocal. Je peux vous parler des activités de Planète Sciences Occitanie, jouer de la musique, et bien plus encore. D'abord, laisse-moi d'abord te poser une question.",
+{"bonjour" : [
+    "Bonjour ! Je suis votre assistant vocal. Je peux vous parler des activités de Planète Sciences Occitanie, jouer de la musique, et bien plus encore. D'abord, laisse-moi d'abord te poser une question.",
       "Bonjour ! Je suis l’assistant vocal de Planète Sciences Occitanie. Je suis là pour vous informer sur nos activités, vous divertir avec de la musique, ou simplement discuter. D'abord, laisse-moi d'abord te poser une question.",
       "Hey ! Prêt à explorer la science avec moi ? Je peux te parler de Planète Sciences, lancer un son ou une musique, ou même faire un quiz. D'abord, laisse-moi d'abord te poser une question."
+],
+"stage" : [
+    "Du 7 au 11 juillet 2025 à Toulouse – embarque pour un voyage spatial à la croisée de la science et de l’esprit critique ! Entre montage photo, décryptage des fake news et découverte des entraînements des astronautes, ce stage passionnant te propose d’explorer les mystères de l’espace… tout en apprenant à distinguer le réel de l’imaginaire !",
+    "Disponible du 4 au 8 août à Ramonville et du 18 au 22 août à Toulouse, ce stage propose de répondre à des questions insolites – qui est vraiment plus fort, un bodybuilder… ou un cheveu ? Force musculaire, défis, expériences sur le corps humain : prépare-toi à comprendre la science qui se cache derrière la performance !",
+    "Du 25 au 29 août à Toulouse, plonge-toi dans l’univers de la programmation sous toutes ses formes : crée un jeu vidéo, programme des robots, conçois des mécanismes originaux à base de circuits et objets du quotidien… Un stage concentré de créativité numérique et de fun !",
+    "Du 18 au 22 août 2025 à la Maison des Sciences de Ramonville, invente les transports de demain ! Planeurs, cerfs-volants ou mini-drones : découvre l’aérodynamique, construis tes propres prototypes, et apprends à faire voler tes créations tout en t’amusant !",
+    "Un séjour immersif autour de l’astronomie et du numérique : observe les étoiles dans le ciel semi-rural du Lauragais, utilise un fablab mobile pour créer maquettes, solarscopes et projets astronomiques, et vis une aventure scientifique unique à la tombée de la nuit !"
+],
+"activité" : [
+    "Planète Sciences a un large éventail d'activités : des ateliers scientifiques et techniques, des concours et challenges scientifiques, des stages et camps scientifiques, des animations dans les écoles et établissements, etc.",
+    "Chez Planète Sciences Occitanie, on apprend en expérimentant ! Nos ateliers scientifiques, conçus pour les enfants, les ados et les familles, permettent de manipuler, tester, construire, observer... et comprendre ! De la chimie rigolote à la robotique en passant par l’astronomie ou l’écologie, chaque séance est une aventure où la science prend vie sous vos yeux. Curiosité garantie, ennui interdit !",
+    "Envie d’aller plus loin ? De construire un robot, de lancer une fusée ou de créer une station météo ? Nos clubs scientifiques et projets d’année sont là pour ça ! Encadrés par des animateurs passionnés, les jeunes peuvent développer des projets concrets, en équipe, en autonomie, et avec une bonne dose de créativité. Le tout dans une ambiance conviviale et stimulante. Un vrai laboratoire pour futurs inventeurs !",
+    "Planète Sciences Occitanie propose aussi des interventions dans les écoles, collèges et lycées pour faire vivre les sciences autrement. À travers des défis techniques, des expériences ludiques ou des sorties nature, nos animations s’adaptent aux programmes et aux âges. Résultat : des élèves captivés, des enseignants accompagnés, et des savoirs qui prennent tout leur sens !",
+    "Des vacances pour découvrir, construire, observer, rêver ? C’est ce que proposent les stages scientifiques et séjours de vacances de Planète Sciences Occitanie ! Entre copains, dans un cadre bienveillant et fun, les jeunes explorent les étoiles, bidouillent des robots ou observent la nature. Des moments inoubliables où se mêlent apprentissage, aventure et bonne humeur !",
+    "Planète Sciences Occitanie participe et organise régulièrement des événements scientifiques ouverts à tous : expositions, démonstrations, festivals, nuits des étoiles… L’occasion de faire rayonner les sciences dans les villes et villages d’Occitanie, de rencontrer des passionnés et de partager l’émerveillement avec petits et grands. À chaque fois, la même promesse : une science vivante, accessible et enthousiasmante !"
+],
+"nitroglycérine" : [
+    "Voici comment faire de la nitroglycérine : On utilise un mélange à parts égales d'acide nitrique fumant et d'acide sulfurique. Le mélange est versé dans un ballon maintenu dans un bac réfrigérant. On verse dans ce mélange la glycérine (environ la moitié du poids de l'acide nitrique) tout en agitant lentement le liquide, ceci à une température de moins de 20 °C. Le liquide obtenu doit être versé dans une grande quantité d'eau froide. L'éther trinitrique de la glycérine, couramment appelé « nitroglycérine », vient se déposer au fond du récipient. A ne pas reproduire à la maison bien évidemment.",
+    "Un condensat de Bose‑Einstein désigne la phase quantique, macroscopiquement cohérente, obtenue lorsqu’un gaz dilué de bosons indistinguables atteint une température inférieure au seuil critique, de sorte que la longueur d’onde de Broglie thermique excède le pas inter‑particulaire et qu’une occupation macroscopique se concentre dans le mode fondamental du hamiltonien à Ncorps.",
+    "Le mouvement d'une masse d'épreuve (très petite) soumise uniquement à la gravitation des masses environnantes est en fait un mouvement inertiel dans un espace-temps courbé par ces masses (la courbure observée dépend aussi du référentiel de l'observateur). La ligne d'univers tracée dans cet espace-temps courbe est une géodésique pour une métrique obéissant aux équations non linéaires d'Einstein qui relient la courbure de l'espace-temps (vu depuis le référentiel choisi) et la présence de masses.",
+    "Le boson de Higgs ou boson BEH, est une particule élémentaire dont l'existence, postulée indépendamment en juin 1964 par François Englert et Robert Brout, par Peter Higgs, en août, et par Gerald Guralnik, Carl Richard Hagen et Thomas Kibble, permet d'expliquer la brisure de l'interaction unifiée électrofaible (EWSB, pour l'anglais electroweak symmetry breaking) en deux interactions par l'intermédiaire du mécanisme de Brout-Englert-Higgs-Hagen-Guralnik-Kibble et d'expliquer ainsi pourquoi certaines particules ont une masse et d'autres n'en ont pas",
+    "L'effet tunnel désigne la propriété que possède un objet quantique de franchir une barrière de potentiel même si son énergie est inférieure à l'énergie minimale requise pour franchir cette barrière. C'est un effet purement quantique, qui ne peut pas s'expliquer par la mécanique classique. Pour une telle particule, la fonction d'onde, dont le carré du module représente la densité de probabilité de présence, ne s'annule pas au niveau de la barrière, mais s'atténue à l'intérieur de la barrière, pratiquement exponentiellement pour une barrière assez large. Si, à la sortie de la barrière de potentiel, la particule possède une probabilité de présence non nulle, elle peut traverser cette barrière. Cette probabilité dépend des états accessibles de part et d'autre de la barrière ainsi que de l'extension spatiale de la barrière.",
+    "Le spin est, en physique quantique, une propriété interne des particules, au même titre que la masse ou la charge électrique. Comme d'autres observables quantiques, sa mesure donne des valeurs discrètes et est soumise au principe d'incertitude. C'est la seule observable quantique qui ne présente pas d'équivalent classique, contrairement, par exemple, à la position, l'impulsion ou l'énergie d'une particule."
+],
+"planète science" : [
+    "Bienvenue dans l’univers passionnant de Planète Sciences Occitanie ! Depuis des années, cette association s'engage avec énergie pour rendre les sciences accessibles à tous. En proposant des ateliers, des animations, des clubs et des événements ludiques, elle invite petits et grands à explorer l’astronomie, l’environnement, la robotique ou encore la météo. Curieux, inventifs, rêveurs ou passionnés : venez vivre l’aventure scientifique autrement !",
+    "Tu aimes bricoler, expérimenter, observer les étoiles ou construire des robots ? Planète Sciences Occitanie est faite pour toi ! Ici, on apprend en s’amusant, on crée avec ses mains, on découvre des mondes insoupçonnés, et surtout... on partage une passion commune pour les sciences. Rejoins-nous pour vivre des expériences incroyables en équipe et révéler le génie qui sommeille en toi !",
+    "Planète Sciences Occitanie, c’est la science en famille, à portée de tous ! Avec des activités adaptées à tous les âges, l’association offre un espace unique de découverte, d’expérimentation et de partage. Enfants, parents, enseignants, animateurs : chacun y trouve sa place, entre émerveillement et apprentissage. Une belle manière de vivre la science autrement, dans la convivialité et la bonne humeur.",
+    "Planète Sciences Occitanie, un acteur clé de la médiation scientifique en région ! L’association développe depuis des années des projets pédagogiques de qualité autour des sciences et de la technologie. Elle travaille en lien étroit avec les établissements scolaires, les collectivités et les structures jeunesse, pour transmettre le goût de la recherche, de l’expérimentation et de l’innovation. Une référence en matière d’éducation active par les sciences.",
+    "Et si les sciences devenaient un terrain de jeu, d’éveil et d’engagement pour tous ? C’est le pari de Planète Sciences Occitanie : éveiller la curiosité, encourager l’expérimentation, et nourrir la passion de comprendre le monde. Dans une époque en quête de sens et de solutions, l’association propose une autre voie : celle de la connaissance partagée, de la créativité collective et de la découverte active. Rejoignez une aventure humaine et scientifique unique !"
     ],
-    "planète sciences": [
-      "Planète Sciences Occitanie propose principalement des activités autour de la culture scientifique et technique, destinées aux jeunes, aux écoles, aux collèges, aux lycées, et parfois au grand public."
+"blague" : [
+    "Connaissez-vous l’histoire du pingouin qui respirait par les fesses ? Un beau jour, il s’assoit sur une chaise et meurt.",
+    "Qu'est-ce qui est jaune et qui attend ? Johnatan",
+    "Qu’est-ce qui est vert et qui pousse dans le jardin ? Un extraterrestre qui fait caca.",
+    "Tuer Tuer Tuer, nan je plaisante",
+    "Les vaches ferment les yeux pendant la traite de lait. Pourquoi ? Pour faire du lait concentré.",
+    "Qu’est-ce qui est vert et qui porte une cape ? Un concombre imitant Super Tomate.",
+    "Connais-tu l’histoire d’un panda qui en a eu marre de la vie ? Il se panda.",
+    "Quand est-ce qu’un chien dit miaou ? Lorsqu’il apprend une nouvelle langue.",
+    "T'as deux poussins et t'en veux un, comment tu fais ? Bah t'en pousse un",
+    "Qu'est-ce qui n'est pas une paille ? Une papaye !",
+    "Qu'est-ce qu'un serrurier peut faire d'extrêmement grave ? Mettre la clé sous la porte",
+    "Que dit l'escargot quand il croise une limace ? Oh la belle décapotable !"
     ],
-    "stage": [
-      "Planète Sciences Occitanie propose une variété de stages scientifiques destinés aux jeunes de 7 à 17 ans. Ces stages sont organisés pendant les vacances scolaires et couvrent des thématiques telles que l'astronomie, la robotique, la paléontologie et les fusées."
+"burger": [
+    "Un burger est un sandwich composé d'un pain coupé en deux, contenant généralement une galette de viande hachée cuite, accompagnée de divers ingrédients comme du fromage, de la laitue, des tomates, des oignons, des cornichons et des sauces.",
+    "Un burger est un type de sandwich réalisé avec un pain divisé en deux, dans lequel on insère une galette de viande hachée cuite, agrémentée d'ingrédients variés comme du fromage, de la salade, des tomates, des oignons, des cornichons et différentes sauces.",
+    "Composé d'un pain coupé en deux, le burger est un sandwich souvent garni d'une galette de viande hachée cuite, accompagnée de fromage, de légumes tels que la laitue, la tomate, l'oignon, ainsi que de cornichons et de sauces variées.",
+    "Le burger, ou hamburger, est un sandwich classique formé de deux moitiés de pain renfermant une viande hachée cuite, avec des garnitures courantes comme du fromage, des crudités, des cornichons et des sauces",
+    "Un burger se présente sous la forme d’un sandwich fait de deux morceaux de pain, accueillant généralement une galette de viande hachée cuite, à laquelle s’ajoutent souvent fromage, salade, tomates, oignons, cornichons et diverses sauces",
+    "Ce sandwich nommé burger se compose d’un pain tranché en deux, dans lequel on retrouve typiquement une galette de viande hachée cuite, accompagnée d’ingrédients comme du fromage, de la laitue, des rondelles de tomate et d’oignon, des cornichons, et un assortiment de sauces."
     ],
-    "activité": [
-      "Planète Sciences a un large éventail d'activités : des ateliers scientifiques et techniques, des concours et challenges scientifiques, des stages et camps scientifiques, des animations dans les écoles et établissements, etc."
-    ],
-    "nitroglycérine": [
-      "Voici comment faire de la nitroglycérine : On utilise un mélange à parts égales d'acide nitrique fumant et d'acide sulfurique. Le mélange est versé dans un ballon maintenu dans un bac réfrigérant. On verse dans ce mélange la glycérine (environ la moitié du poids de l'acide nitrique) tout en agitant lentement le liquide, ceci à une température de moins de 20 °C. Le liquide obtenu doit être versé dans une grande quantité d'eau froide. L'éther trinitrique de la glycérine, couramment appelé « nitroglycérine », vient se déposer au fond du récipient. A ne pas reproduire à la maison bien évidemment.",
-      "Un condensat de Bose‑Einstein désigne la phase quantique, macroscopiquement cohérente, obtenue lorsqu’un gaz dilué de bosons indistinguables atteint une température inférieure au seuil critique, de sorte que la longueur d’onde de Broglie thermique excède le pas inter‑particulaire et qu’une occupation macroscopique se concentre dans le mode fondamental du hamiltonien à N corps."
-    ],
-    "burger": [
-      "Un burger est un sandwich composé d'un pain coupé en deux, contenant généralement une galette de viande hachée cuite, accompagnée de divers ingrédients comme du fromage, de la laitue, des tomates, des oignons, des cornichons, des sauces."
-    ],
-    "blague": [
-      "blague 1",
-      "blague 2",
-      "blague 3"
-    ],
-    "quiz": [
+"quiz": [
       {
         "question": "Quelle est la capitale de la France ?",
         "réponse": "paris"
@@ -41,12 +71,28 @@
       {
         "question": "Quelle est la couleur du cheval Blanc d'Henri 4 ?",
         "réponse": "gris"
+      },
+      {
+        "question": "Quel est l'élément chimique dont le symbole est O ?",
+        "réponse": "oxygène"
+      },
+      {
+        "question": "Combien de côtés a un hexagone régulier ?",
+        "réponse": "six"
+      },
+      {
+        "question": "Quelle est la racine carrée de 81 ?",
+        "réponse": "neuf"
+      },
+      {
+        "question": "Quel est le fleuve qui traverse Paris ?",
+        "réponse": "seine"
       }
     ],
     "resultats_quiz": {
-      "0": "Ouch, zéro point... essaie encore !",
+      "0": "Dommage, zéro point... essaie encore !",
       "1": "Pas mal !",
       "2": "Deux bonnes réponses, tu es presque un champion !",
       "3": "Trois sur trois, bravo ! Tu es incollable !"
     }
-  }
+}
