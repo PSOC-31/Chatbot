@@ -236,6 +236,13 @@ def listen_and_respond():
         # Boucle principale
         last_active_time = time.time()
         while True:
+            # Met à jour le timer si une musique ou un son vient de se terminer
+            for proc_name in ("music_proc", "sound_proc"):
+                proc = globals()[proc_name]
+                if proc and proc.poll() is not None:  # processus terminé
+                    globals()[proc_name] = None       # nettoyage
+                    last_active_time = time.time()    # mise à jour du timer
+
             # Réinitialise si aucune activité pendant 90 secondes
             if not is_audio_playing() and time.time() - last_active_time > INACTIVITY_TIMEOUT:
                 speak("Aucune activité détectée. Je retourne en veille.")
@@ -259,7 +266,7 @@ def listen_and_respond():
                     if proc and proc.poll() is None:
                         proc.terminate()
                         music_proc = None
-
+                        
                     speak("Arrêt du programme.")
                     if INIT_FILE.exists():
                         INIT_FILE.unlink()
