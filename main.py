@@ -12,7 +12,7 @@ import time
 
 # ──────────────── Configuration générale ────────────────
 random.seed()                              # graine aléatoire
-ROOT          = Path("/home/rod/stage_minichatbot")
+ROOT          = Path("/home/psoc/chatbot")
 MODEL_PATH    = ROOT / "vosk" / "vosk-model-small-fr-0.22"
 MUSIC_DIR     = ROOT / "sounds" / "musics"
 SOUND_DIR     = ROOT / "sounds" / "random"
@@ -28,7 +28,7 @@ assistant_active = False     # réveille / endort l'assistant
 en_ecoute        = True      # pause / play
 music_proc       = None
 sound_proc       = None
-has_bac = False
+has_bac          = False
 has_answered_bac = False
 
 # ──────────────── Utilitaires ────────────────
@@ -285,6 +285,7 @@ def listen_and_respond():
             if "chanson" in text or "musique" in text:
                 if path := random_file(MUSIC_DIR):
                     play_mp3(path, "music_proc")
+                    last_active_time = time.time()
                 else:
                     speak("Aucune musique trouvée.")
                 continue
@@ -292,6 +293,7 @@ def listen_and_respond():
             if "son" in text:
                 if path := random_file(SOUND_DIR):
                     play_mp3(path, "sound_proc")
+                    last_active_time = time.time()
                 else:
                     speak("Aucun son trouvé.")
                 continue
