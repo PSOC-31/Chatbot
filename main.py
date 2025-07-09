@@ -154,6 +154,8 @@ def run_quiz():
 # ──────────────── Boucle principale ────────────────
 def listen_and_respond():
     global assistant_active, en_ecoute, has_bac, has_answered_bac
+    global music_proc
+
 
     if not INIT_FILE.exists():
         speak("Assistant initialisé avec succès.")
@@ -246,10 +248,36 @@ def listen_and_respond():
 
             text = json.loads(rec.Result()).get("text", "").lower()
             if not text:
-                continue  # ← n'actualise pas le timer si vide
+                continue
 
-            last_active_time = time.time()  # ← seulement si une vraie entrée
             print(f"> {text}")
+
+            # ---------- Priorité : armageddon ou chut pendant la musique ----------
+            if music_proc and music_proc.poll() is None:
+                if "armageddon" in text:
+                    proc = music_proc
+                    if proc and proc.poll() is None:
+                        proc.terminate()
+                        music_proc = None
+
+                    speak("Arrêt du programme.")
+                    if INIT_FILE.exists():
+                        INIT_FILE.unlink()
+                    break
+
+                if "chut" in text:
+                    proc = music_proc
+                    if proc and proc.poll() is None:
+                        proc.terminate()
+                        music_proc = None
+                    continue
+
+                # Toute autre commande est ignorée pendant la musique
+                continue
+
+            # ---------- Activité vocale normale ----------
+            last_active_time = time.time()
+
 
 
             # ---------- commandes système ----------
