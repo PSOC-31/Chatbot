@@ -15,7 +15,7 @@ Ce projet est un assistant vocal interactif développé en Python. Il est capabl
 
 ## Lancer l'assistant
 
-Assurez-vous que les dépendances sont installées (voir ci-dessous), puis exécutez la commande bash
+Assurez-vous que les dépendances sont installées (voir ci-dessous), puis exécutez les commandes bash
 
 
 ## Dépendances
@@ -25,4 +25,6 @@ pip install vosk sounddevice
 
 
 ```bash
-python3 main.py
+cd ~/chatbot/
+chmod +x main.py
+./main.py
