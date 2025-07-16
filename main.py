@@ -12,7 +12,7 @@ import time
 
 # ──────────────── Configuration générale ────────────────
 random.seed()                              # graine aléatoire
-ROOT          = Path("/home/psoc/chatbot")
+ROOT          = Path("/home/rod/stage_minichatbot")
 MODEL_PATH    = ROOT / "vosk" / "vosk-model-small-fr-0.22"
 MUSIC_DIR     = ROOT / "sounds" / "musics"
 SOUND_DIR     = ROOT / "sounds" / "random"
@@ -25,17 +25,29 @@ INACTIVITY_TIMEOUT = 90  # Durée max d'inactivité avant retour en veille
 
 # ──────────────── États globaux ────────────────
 assistant_active = False     # réveille / endort l'assistant
+assistant_parle  = False
 en_ecoute        = True      # pause / play
 music_proc       = None
 sound_proc       = None
 has_bac          = False
 has_answered_bac = False
 
+
 # ──────────────── Utilitaires ────────────────
 def speak(text: str) -> None:
-    """Synthèse vocale simple basée sur pico2wave + aplay."""
+    global assistant_parle
+    assistant_parle = True
     print(f"[TTS] {text}")
     os.system(f'pico2wave -l=fr-FR -w=/tmp/tts.wav "{text}" && aplay /tmp/tts.wav && rm /tmp/tts.wav')
+    assistant_parle = False
+
+    # Vide la file audio pour éviter les phrases accumulées
+    while not audio_q.empty():
+        try:
+            audio_q.get_nowait()
+        except queue.Empty:
+            break
+
 
 def play_mp3(path: Path, proc_attr: str) -> None:
     """Lance un mp3 via mpg123 ; arrête l’ancien si besoin."""
@@ -57,14 +69,18 @@ def is_audio_playing() -> bool:
 
 # ──────────────── Préparation Vosk ────────────────
 if not MODEL_PATH.exists():
-    raise SystemExit(f"Modèle Vosk manquant : {MODEL_PATH}")
+    raise SystemExit(f"Modèle Vosk manquant : {MODEL_PATH}")
 
 model    = vosk.Model(str(MODEL_PATH))
 rec      = vosk.KaldiRecognizer(model, SAMPLE_RATE)
 audio_q  = queue.Queue()
 
 def audio_callback(indata, frames, time, status):
-    if status: print(status)
+    global assistant_parle
+    if assistant_parle:
+        return  # ignore l'audio pendant que l'assistant parle
+    if status:
+        print(status)
     audio_q.put(bytes(indata))
 
 # ──────────────── Chargement données ────────────────
@@ -248,6 +264,8 @@ def listen_and_respond():
                 speak("Aucune activité détectée. Je retourne en veille.")
                 raise AssistantReset
 
+            if assistant_parle:
+                continue    # ignore l'audio pendant que l'assistant parle
 
             data = audio_q.get()
             if not rec.AcceptWaveform(data):
