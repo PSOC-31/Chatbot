@@ -57,7 +57,7 @@ Activez l’environnement virtuel si ce n’est pas déjà fait :
 source venv/bin/activate
 ```
 
-Puis lancez le script :
+Puis lancez le script (depuis le répertoire /chatbot) :
 
 ```bash
 chmod +x main.py
