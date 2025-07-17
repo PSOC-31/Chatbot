@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# ──────────────────  assistant_vocal.py  ──────────────────
+# ──────────────────  main.py  ──────────────────
 import os
 import json
 import queue
@@ -9,36 +9,50 @@ from pathlib import Path
 import sounddevice as sd
 import vosk
 import time
+import tempfile
+
+from TTS.api import TTS  # Coqui TTS
 
 # ──────────────── Configuration générale ────────────────
-random.seed()                              # graine aléatoire
-ROOT          = Path("/home/rod/stage_minichatbot")
+random.seed()
+ROOT          = Path("/home/psoc/chatbot")
 MODEL_PATH    = ROOT / "vosk" / "vosk-model-small-fr-0.22"
 MUSIC_DIR     = ROOT / "sounds" / "musics"
 SOUND_DIR     = ROOT / "sounds" / "random"
 DATA_JSON     = ROOT / "data.json"
 FAREWELL_MP3  = ROOT / "sounds" / "Au_revoir.mp3"
 MAUVAIS_MP3   = ROOT / "sounds" / "Tes_mauvais.mp3"
-INIT_FILE = ROOT / ".initialized"
+INIT_FILE     = ROOT / ".initialized"
 SAMPLE_RATE   = 16_000
-INACTIVITY_TIMEOUT = 90  # Durée max d'inactivité avant retour en veille
+INACTIVITY_TIMEOUT = 90
 
 # ──────────────── États globaux ────────────────
-assistant_active = False     # réveille / endort l'assistant
+assistant_active = False
 assistant_parle  = False
-en_ecoute        = True      # pause / play
+en_ecoute        = True
 music_proc       = None
 sound_proc       = None
 has_bac          = False
 has_answered_bac = False
 
+# ──────────────── Initialiser Coqui TTS ────────────────
+coqui_tts = TTS(model_name="tts_models/fr/css10/vits")
 
 # ──────────────── Utilitaires ────────────────
 def speak(text: str) -> None:
     global assistant_parle
     assistant_parle = True
     print(f"[TTS] {text}")
-    os.system(f'pico2wave -l=fr-FR -w=/tmp/tts.wav "{text}" && aplay /tmp/tts.wav && rm /tmp/tts.wav')
+
+    # Génère un fichier temporaire avec la voix synthétisée
+    with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp_file:
+        tmp_path = tmp_file.name
+        coqui_tts.tts_to_file(text=text, file_path=tmp_path)
+
+    # Joue le fichier WAV avec aplay
+    os.system(f'aplay {tmp_path}')
+    os.remove(tmp_path)
+
     assistant_parle = False
 
     # Vide la file audio pour éviter les phrases accumulées
@@ -48,15 +62,11 @@ def speak(text: str) -> None:
         except queue.Empty:
             break
 
-
 def play_mp3(path: Path, proc_attr: str) -> None:
-    """Lance un mp3 via mpg123 ; arrête l’ancien si besoin."""
     global music_proc, sound_proc
-    # arrêter le process existant
     proc = globals()[proc_attr]
     if proc and proc.poll() is None:
         proc.terminate()
-    # lancer le nouveau
     globals()[proc_attr] = subprocess.Popen(["mpg123", str(path)])
 
 def random_file(directory: Path) -> Path | None:
@@ -64,7 +74,6 @@ def random_file(directory: Path) -> Path | None:
     return random.choice(files) if files else None
 
 def is_audio_playing() -> bool:
-    """Retourne True si un son ou une musique est en cours de lecture."""
     return (music_proc and music_proc.poll() is None) or (sound_proc and sound_proc.poll() is None)
 
 # ──────────────── Préparation Vosk ────────────────
@@ -78,7 +87,7 @@ audio_q  = queue.Queue()
 def audio_callback(indata, frames, time, status):
     global assistant_parle
     if assistant_parle:
-        return  # ignore l'audio pendant que l'assistant parle
+        return
     if status:
         print(status)
     audio_q.put(bytes(indata))
@@ -86,6 +95,8 @@ def audio_callback(indata, frames, time, status):
 # ──────────────── Chargement données ────────────────
 with DATA_JSON.open(encoding="utf-8") as f:
     definitions: dict[str, list[str]] = json.load(f)
+
+
 
 # ──────────────── Exception ────────────────
 class AssistantReset(Exception):
