@@ -19,6 +19,7 @@ SOUND_DIR     = ROOT / "sounds" / "random"
 DATA_JSON     = ROOT / "data.json"
 FAREWELL_MP3  = ROOT / "sounds" / "Au_revoir.mp3"
 MAUVAIS_MP3   = ROOT / "sounds" / "Tes_mauvais.mp3"
+MARMOT_MP3     = ROOT / "sounds" / "Angry_marmot.mp3"
 INIT_FILE = ROOT / ".initialized"
 SAMPLE_RATE   = 16_000
 INACTIVITY_TIMEOUT = 90  # Durée max d'inactivité avant retour en veille
@@ -361,6 +362,15 @@ def listen_and_respond():
                 play_mp3(FAREWELL_MP3, "sound_proc")
                 speak("À bientôt.")
                 raise AssistantReset
+
+            # ---------- gag personnalisé ----------
+            if "mange tes morts" in text:
+                if MARMOT_MP3.exists():
+                    play_mp3(MARMOT_MP3, "sound_proc")
+                else:
+                    speak("Le son est introuvable.")
+                continue
+            # ---------------------------------------
 
             # ---------- réponses aux mots‑clés ----------
             words = text.split()
