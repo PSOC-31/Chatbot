@@ -10,54 +10,69 @@ Ce projet est un assistant vocal interactif développé en Python. Il utilise la
 
 ---
 
-## Installation (Raspberry Pi 3 avec environnement virtuel)
+## Installation (Raspberry Pi 3)
 
-### 1. Dépendances système
-
-```bash
-sudo apt update
-sudo apt install -y mpg123 python3-pip python3-venv python3-dev libasound2-dev build-essential
-```
-
-### 2. Cloner le projet
+### 1. Cloner le projet
 
 ```bash
 git clone https://github.com/PSOC-31/Chatbot.git
 cd chatbot
 ```
 
-### 3. Créer et activer un environnement virtuel
+### 2. Dépendances système
 
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+sudo apt update
+sudo apt install -y mpg123 libttspico-utils python3-pip python3-sounddevice
 ```
 
-### 4. Installer Rust (requis pour certaines dépendances de TTS)
+### 3. Installer les dépendances Python
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-source $HOME/.cargo/env
+pip3 install vosk
 ```
 
-### 5. Installer les dépendances Python dans l’environnement
+### 4. Télécharger le modèle Vosk FR
 
 ```bash
-pip install --upgrade pip
-pip install vosk sounddevice TTS
+mkdir -p vosk
+cd vosk
+wget https://alphacephei.com/vosk/models/vosk-model-small-fr-0.22.zip
+unzip vosk-model-small-fr-0.22.zip
+rm vosk-model-small-fr-0.22.zip
+cd ..
+```
+
+### 5. Ajouter des sons et musiques
+
+- Place tes musiques (.mp3) dans sounds/musics/
+- Place tes sons aléatoires (.mp3) dans sounds/random/
+- Place tes fichiers de réaction dans sounds/ (ex. Au_revoir.mp3, Tes_mauvais.mp3)
+
+### 6. Ajouter les définitions (questions/réponses)
+
+Édite data.json avec des blocs de type :
+
+```json
+{
+  "bonjour": ["Salut, je suis prêt !"],
+  "quiz": [
+    {"question": "Quelle est la capitale de la France ?", "réponse": "Paris"}
+  ],
+  "resultats_quiz": {
+    "0": "Aïe, tu peux faire mieux !",
+    "1": "Pas mal.",
+    "2": "Bravo !",
+    "3": "Excellent !"
+  }
+}
 ```
 
 ---
 
 ## Lancer l’assistant
 
-Activez l’environnement virtuel si ce n’est pas déjà fait :
-
-```bash
-source venv/bin/activate
-```
-
-Puis lancez le script (depuis le répertoire /chatbot) :
+Depuis le répertoire /chatbot
 
 ```bash
 chmod +x main.py
@@ -77,7 +92,6 @@ chatbot/
 │   ├── musics/            # Musiques aléatoires
 │   └── random/            # Sons aléatoires
 ├── .initialized           # Fichier de contrôle interne
-└── venv/                  # Environnement virtuel Python
 ```
 
 ---
@@ -91,17 +105,3 @@ chatbot/
 - **"Chanson"** ou **"musique"** : Joue un fichier aléatoire
 - **"Son"** : Joue un son court aléatoire
 - **"Chut"** : Coupe le son en cours
-
----
-
-## Reconnaissance vocale avec VOSK
-
-Téléchargez le modèle français VOSK ici :  
-https://alphacephei.com/vosk/models  
-Puis décompressez-le dans `vosk/` (par exemple `vosk/vosk-model-small-fr-0.22`).
-
----
-
-## Synthèse vocale : Coqui TTS
-
-Le projet utilise la librairie [`TTS`](https://github.com/coqui-ai/TTS) pour parler en français. Le modèle est automatiquement téléchargé au premier lancement.
